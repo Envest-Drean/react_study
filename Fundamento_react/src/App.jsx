@@ -1,16 +1,15 @@
 import { Header } from "./componets/Header";
-import { Post } from "./post";
-import { sidebar } from "./componets/sidebar";
+import { Post } from "./componets/post";
+import { Sidebar } from "./componets/sidebar";
 
 import style from "./app.module.css";
-import "./global.css";
 
 function App() {
 	return (
 		<div>
 			<Header />
 			<div className={style.wrapper}>
-				<sidebar />
+				<Sidebar />
 				<main>
 					<Post author="itto sanzzo" content="primeiro post test" />
 					<Post author="miguel" content="test" />
