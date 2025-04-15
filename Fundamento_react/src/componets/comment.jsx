@@ -1,7 +1,7 @@
-import { ThumbsUp, Trash, TrashSimple } from "phosphor-react";
+import { ThumbsUp, Trash } from "phosphor-react";
 import style from "./comment.module.css";
 
-export function comment() {
+export function Comment() {
 	return (
 		<div className={style.comment}>
 			<img title="mariath" src="https://github.com/mariathdev.png" />
@@ -9,7 +9,7 @@ export function comment() {
 				<div className={style.commentContent}>
 					<header>
 						<div className="authorAndTime">
-							<strong>Matheus mariath viana</strong>
+							<strong>Matheus mariath</strong>
 							<time
 								title="14 de abril as 00:23"
 								dateTime="2025-04-14 00:23:43">
