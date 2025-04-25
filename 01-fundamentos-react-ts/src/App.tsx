@@ -1,22 +1,28 @@
-import { Header } from "./componets/Header";
-import { Post } from "./componets/post";
-import { Sidebar } from "./componets/sidebar";
+import { Header } from "./components/Header";
+import { Author, content, Post } from "./components/Post";
+import { Sidebar } from "./components/sidebar";
 import style from "./app.module.css";
-import { Avatar } from "./componets/Avatar";
 
 // author: {avatar_url: "",name: "", role: ""}
 // publishedAt: date
 //content: string
 
-const post = [
+type Post = {
+	id: number;
+	author: Author;
+	contents: content[];
+	publishedAt: Date;
+};
+
+const posts: Post[] = [
 	{
 		id: 1,
 		author: {
-			AvatarUrl: "https://github.com/ittosanzzo.png",
+			avatarUrl: "https://github.com/ittosanzzo.png",
 			name: "Itto Sanzzo",
 			role: "developer fullstack",
 		},
-		content: [
+		contents: [
 			{ type: "paragraph", content: "Olá, pessoal!" },
 			{
 				type: "paragraph",
@@ -34,11 +40,11 @@ const post = [
 	{
 		id: 2,
 		author: {
-			AvatarUrl: "https://github.com/envest-Drean.png",
+			avatarUrl: "https://github.com/envest-Drean.png",
 			name: "Envest-Drean",
 			role: "Developer Newbie",
 		},
-		content: [
+		contents: [
 			{ type: "paragraph", content: "Olá, pessoal!" },
 			{
 				type: "paragraph",
@@ -47,8 +53,7 @@ const post = [
 			},
 			{
 				type: "link",
-				content:
-					"👉acesse em: https://github.com/Envest-Drean/themeSwitcher",
+				content: "👉acesse em: https://github.com/Envest-Drean/themeSwitcher",
 			},
 			{ type: "link", content: "#site #itto #perck" },
 		],
@@ -62,12 +67,12 @@ function App() {
 			<div className={style.wrapper}>
 				<Sidebar />
 				<main>
-					{post.map((post) => {
+					{posts.map((post) => {
 						return (
 							<Post
 								key={post.id}
 								author={post.author}
-								content={post.content}
+								content={post.contents}
 								publishedAt={post.publishedAt}
 							/>
 						);

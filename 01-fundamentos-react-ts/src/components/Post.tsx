@@ -1,38 +1,55 @@
 import { format, formatDistanceToNow } from "date-fns";
-import ptBr, { ptBR } from "date-fns/locale/pt-BR";
-import style from "./post.module.css";
+import { ptBR } from "date-fns/locale/pt-BR";
+import style from "./Post.module.css";
 import { Comment } from "./comment";
 import { Avatar } from "./Avatar";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
 
-export function Post({ author, publishedAt, content }) {
+export interface Author {
+	name: string;
+	role: string;
+	avatarUrl: string;
+}
+
+export interface content {
+	type: "paragraph" | "link";
+	content: string;
+}
+
+interface postprops {
+	author: Author;
+	publishedAt: Date;
+	content: content[];
+}
+
+export function Post({ author, publishedAt, content }: postprops) {
 	const [comment, setcomment] = useState(["post interessante."]);
 	const [newCommentText, setNewCommentText] = useState("");
 	const publishedDateFormattend = format(
 		publishedAt,
 		"dd 'de' LLLL 'as' HH:mm'h'",
 		{
-			locale: ptBr,
+			locale: ptBR,
 		}
 	);
 	const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
-		locale: ptBr,
+		locale: ptBR,
 		addSuffix: true,
 	});
-	function handleCreateNewComment() {
+	function handleCreateNewComment(event: FormEvent) {
 		event.preventDefault();
 		setcomment([...comment, newCommentText]);
 		setNewCommentText("");
 	}
-	function handleNewCommentchange() {
+	function handleNewCommentchange(event: ChangeEvent<HTMLTextAreaElement>) {
 		event.target.setCustomValidity("");
 		setNewCommentText(event.target.value);
 	}
-	function handleNewcommentInvalid() {
+	function handleNewcommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
 		event.target.setCustomValidity("campo obrigatorio!");
 	}
 
-	function deleteComment(commentToDelete) {
+	function deleteComment(commentToDelete: string) {
 		const commentsWithoutDeleteOne = comment.filter(
 			(comment) => comment !== commentToDelete
 		);
@@ -43,7 +60,7 @@ export function Post({ author, publishedAt, content }) {
 		<article className={style.post}>
 			<header>
 				<div className={style.author}>
-					<Avatar src={author.AvatarUrl} />
+					<Avatar src={author.avatarUrl} />
 					<div className={style.authorInfo}>
 						<strong>{author.name}</strong>
 						<span>{author.role}</span>
