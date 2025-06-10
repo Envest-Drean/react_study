@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { NewCycleForm } from "./Components/NewCycleForm";
 import { Countdown } from "./Components/CountDown";
 import { CyclesContext } from "../../contexts/CycleContexts";
-/*import { secondsInDay } from "date-fns/constants";*/
+/*import { secondsInDay } from "date-fns/constants"*/
 
 const newCycleFormValidationSchema = zod.object({
 	task: zod.string().min(1, "Informe a tarefa"),
@@ -33,15 +33,18 @@ export function Home() {
 			minutesAmount: 0,
 		},
 	});
-	const { handleSubmit, watch /*reset*/ } = newCycleForm;
-
+	const { handleSubmit, watch, reset } = newCycleForm;
+	function handleCreateNewCycle(data: newCycleFormData) {
+		createNewCycle(data);
+		reset();
+	}
 	const task = watch("task");
 	const isSubmitDisabled = !task;
 
 	/*console.log(cycles);*/
 	return (
 		<HomeContainer>
-			<form onSubmit={handleSubmit(createNewCycle)} action="">
+			<form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
 				<FormProvider {...newCycleForm}>
 					<NewCycleForm />
 				</FormProvider>
