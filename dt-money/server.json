@@ -1,0 +1,12 @@
+{
+	"transactions": [
+		{
+			"id": 1,
+			"description": "Desenvolvimento de sistema",
+			"type": "income",
+			"category": "venda",
+			"price": 14000,
+			"createdAt": "2025-06-23T06:01:12.674Z"
+		}
+	]
+}
